@@ -38,10 +38,10 @@ Další verze si pak aplikace umí stáhnout sama (⚙ → Aktualizace).
 
 ## Sestavení ze zdrojáků
 
-Potřebuješ JDK 21, Android SDK (platform 33, build-tools 33.0.2) a Gradle. Podrobný postup pro Linux včetně podepsání je v [NAVOD.md](NAVOD.md).
+Potřebuješ JDK 21 a Android SDK (platform 33, build-tools 33.0.2). Gradle instalovat nemusíš, `gradlew` si stáhne správnou verzi sám. Podrobný postup pro Linux včetně podepsání je v [NAVOD.md](NAVOD.md).
 
 ```bash
-gradle assembleRelease
+./gradlew assembleRelease
 ```
 
 Pro vydání nové verze je tu skript [`vydat.sh`](vydat.sh) — sestaví, podepíše, nahraje release a aktualizuje `verze.json`.

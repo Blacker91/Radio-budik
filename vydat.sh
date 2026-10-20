@@ -17,12 +17,46 @@ set -euo pipefail
 REPO="${REPO:-Blacker91/Radio-budik}"        # tvuj ucet/repozitar na GitHubu
 KEYSTORE="${KEYSTORE:-$HOME/budik.keystore}"
 ALIAS="${ALIAS:-budik}"
-BUILD_TOOLS="${BUILD_TOOLS:-$HOME/android-sdk/build-tools/33.0.2}"
+BUILD_TOOLS="${BUILD_TOOLS:-}"                # prazdne = najde se samo v SDK
 # ----------------------------------
 
 NOVINKY="${1:-Opravy a vylepšení}"
 KOREN="$(cd "$(dirname "$0")" && pwd)"
 cd "$KOREN"
+
+# ---------- Java a Android SDK ----------
+# Gradle 8.5 potrebuje Javu 17-21. Kali ma ve vychozim stavu novejsi,
+# se kterou sestaveni spadne - proto si 21 najdeme sami.
+if [[ -z "${JAVA_HOME:-}" ]]; then
+    for j in /usr/lib/jvm/java-21-openjdk-* /usr/lib/jvm/java-17-openjdk-*; do
+        if [[ -x "$j/bin/java" ]]; then export JAVA_HOME="$j"; break; fi
+    done
+fi
+if [[ -z "${JAVA_HOME:-}" ]]; then
+    echo "CHYBA: nenasel jsem Javu 21 ani 17. Nainstaluj: sudo apt install openjdk-21-jdk" >&2
+    exit 1
+fi
+echo "== Java: $JAVA_HOME"
+
+if [[ -z "${ANDROID_HOME:-}" && -d "$HOME/android-sdk" ]]; then
+    export ANDROID_HOME="$HOME/android-sdk"
+fi
+if [[ -z "${ANDROID_HOME:-}" ]]; then
+    echo "CHYBA: nenasel jsem Android SDK. Nastav ANDROID_HOME, nebo ho dej do ~/android-sdk" >&2
+    exit 1
+fi
+echo "== Android SDK: $ANDROID_HOME"
+
+# build-tools: preferujeme 33.0.2, jinak vezmeme nejnovejsi nainstalovane
+if [[ -z "$BUILD_TOOLS" ]]; then
+    if [[ -x "$ANDROID_HOME/build-tools/33.0.2/apksigner" ]]; then
+        BUILD_TOOLS="$ANDROID_HOME/build-tools/33.0.2"
+    else
+        BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/*/ 2>/dev/null | sort -V | tail -1)
+        BUILD_TOOLS="${BUILD_TOOLS%/}"
+    fi
+fi
+[[ -x "$BUILD_TOOLS/apksigner" ]] || { echo "CHYBA: v $BUILD_TOOLS chybi apksigner" >&2; exit 1; }
 
 if [[ "$REPO" == ZMENME/* ]]; then
     echo "CHYBA: vypln REPO (uprav skript, nebo spust: REPO=ucet/repo ./vydat.sh ...)" >&2
@@ -48,7 +82,8 @@ fi
 
 # ---------- sestaveni ----------
 echo "== Sestavuji"
-gradle assembleRelease
+# gradlew si spravnou verzi Gradlu stahne sam (poprve to chvili trva)
+./gradlew assembleRelease
 
 UNSIGNED="app/build/outputs/apk/release/app-release-unsigned.apk"
 [[ -f "$UNSIGNED" ]] || { echo "CHYBA: $UNSIGNED nevznikl" >&2; exit 1; }

@@ -67,18 +67,13 @@ sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
 ### 3. Gradle
 
-```bash
-sudo apt install gradle
-gradle --version    # potřeba 7.5 nebo novější
-```
-
-Pokud je v repozitáři starší verze, stáhni Gradle 7.6 ručně z gradle.org a rozbal.
+Instalovat nemusíš. Projekt obsahuje `gradlew`, který si při prvním sestavení stáhne správnou verzi Gradlu (8.5) sám.
 
 ### 4. Sestavení
 
 ```bash
 cd ~/RadioBudik
-gradle assembleRelease
+./gradlew assembleRelease
 ```
 
 Výsledek: `app/build/outputs/apk/release/app-release-unsigned.apk`
