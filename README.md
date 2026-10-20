@@ -54,7 +54,7 @@ Pokud si projekt forkneš, přepiš v `MainActivity.java` konstantu `DEFAULT_UPD
 
 - Stanice vysílající přes **HLS** jsou vynechané — `MediaPlayer` na Androidu 8.1 je spolehlivě nezvládá.
 - Ne každá stanice posílá název skladby; u těch, které ne, to aplikace řekne.
-- Testováno na LX04 s upravenou ROM. Globální verze **X04G** (Android 10 Go) by měla fungovat taky, ale není ověřená.
+- Testováno na LX04 s upravenou ROM.
 
 ## Licence
 
