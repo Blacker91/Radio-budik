@@ -163,8 +163,9 @@ public class Updater {
             fos = null;
 
             // APK zacina jako kazdy ZIP znakama "PK" - hruba kontrola,
-            // ze jsme nestahli chybovou stranku
-            if (total < 100000 || !looksLikeZip(out)) {
+            // ze jsme nestahli chybovou stranku. Aplikace sama ma jen
+            // kolem 60 kB, proto je spodni hranice nizko.
+            if (total < 20000 || !looksLikeZip(out)) {
                 out.delete();
                 return null;
             }

@@ -132,8 +132,7 @@ git push
 VETEV=$(git rev-parse --abbrev-ref HEAD)
 echo
 echo "== Hotovo"
-echo "Adresa pro budík:"
-echo "  https://raw.githubusercontent.com/$REPO/$VETEV/verze.json"
+echo "Release: https://github.com/$REPO/releases/tag/v$VN"
+echo "Budíky ji najdou v ⚙ → Aktualizace (nebo samy do 24 hodin)."
 echo
-echo "Vlož ji na budíku do ⚙ → Aktualizace → Adresa,"
-echo "nebo pohodlněji z mobilu přes webové rozhraní budíku."
+echo "Před příštím vydáním zvyš versionCode a versionName v app/build.gradle."

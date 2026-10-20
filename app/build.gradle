@@ -15,8 +15,8 @@ android {
         // POZOR: versionCode zvys pri KAZDEM vydani, jinak budik
         // aktualizaci nepozna - porovnava se prave tohle cislo.
         // Hlida to i skript vydat.sh.
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         // dostupne v kodu jako BuildConfig.BUILD_DATE
         buildConfigField "String", "BUILD_DATE", "\"${buildStamp}\""

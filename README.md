@@ -31,7 +31,7 @@ Internetové rádio napsané na míru budíku **Xiaomi Mi Smart Clock** — čí
 Hotové APK je v [Releases](../../releases). Do budíku přes ADB:
 
 ```bash
-adb install -r radio-1.1.apk
+adb install -r radio-1.2.apk
 ```
 
 Další verze si pak aplikace umí stáhnout sama (⚙ → Aktualizace).
