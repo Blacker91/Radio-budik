@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+// Datum a cas sestaveni - dosadi se automaticky pri kazdem prekladu
+def buildStamp = new Date().format("d. M. yyyy HH:mm")
+
+android {
+    namespace 'cz.budik.radio'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "cz.budik.radio"
+        minSdk 21
+        // Cileno na Android 8.1 v budiku
+        targetSdk 27
+        // POZOR: versionCode zvys pri KAZDEM vydani, jinak budik
+        // aktualizaci nepozna - porovnava se prave tohle cislo.
+        // Hlida to i skript vydat.sh.
+        versionCode 2
+        versionName "1.1"
+
+        // dostupne v kodu jako BuildConfig.BUILD_DATE
+        buildConfigField "String", "BUILD_DATE", "\"${buildStamp}\""
+
+        // vektorova ikona se pri sestaveni prevede i do PNG pro stare Androidy
+        vectorDrawables.useSupportLibrary = false
+        vectorDrawables.generatedDensities = ['mdpi', 'hdpi', 'xhdpi']
+
+        // Zadne nativni knihovny -> zadna chyba NO_MATCHING_ABIS
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        encoding = "UTF-8"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+// Zdrojaky jsou v UTF-8 kvuli ceske diakritice
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// ZADNE zavislosti - jen Android framework.
+// Diky tomu odpada ConstraintLayout (pad "layout_width"),
+// AndroidX i Google Play Services, ktere v budiku nejsou.
+dependencies {
+}

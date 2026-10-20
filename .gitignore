@@ -1,0 +1,18 @@
+# Sestaveni
+.gradle/
+build/
+app/build/
+local.properties
+*.apk
+*.aab
+*.idsig
+
+# Podpisove klice - NIKDY nenahravat
+*.keystore
+*.jks
+keystore.properties
+
+# IDE a system
+.idea/
+*.iml
+.DS_Store

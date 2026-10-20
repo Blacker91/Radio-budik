@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tri obrazovky prepinane viditelnosti:
+    viewList        - seznam stanic
+    viewNowPlaying  - logo v pozadi, nazev stanice, prave hraje
+    viewClock       - jen hodiny a datum pres cely displej
+
+  Zadny ConstraintLayout - jen FrameLayout/LinearLayout z frameworku.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D0D12">
+
+    <!-- ============ 1) SEZNAM STANIC ============ -->
+    <LinearLayout
+        android:id="@+id/viewList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="#15151C">
+
+            <TextView
+                android:id="@+id/tvListClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="--:--"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:textColor="#FFFFFF" />
+
+            <!-- svisla linka oddeluje hodiny od informaci o prehravani -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:background="#2E2E3C" />
+
+            <LinearLayout
+                android:id="@+id/boxNowPlaying"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:minHeight="40dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="6dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:descendantFocusability="blocksDescendants">
+
+                <TextView
+                    android:id="@+id/tvListStation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Stanice"
+                    android:textSize="14sp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="#8A8A99" />
+
+                <TextView
+                    android:id="@+id/tvListTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:visibility="gone"
+                    android:textColor="#4FC3F7" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnListStop"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="6dp"
+                android:text="■"
+                android:textSize="15sp"
+                android:padding="0dp"
+                android:visibility="gone"
+                android:textColor="#FFFFFF"
+                android:background="#3A5A6A" />
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="6dp"
+                android:text="⌕"
+                android:textSize="22sp"
+                android:padding="0dp"
+                android:textColor="#FFFFFF"
+                android:background="#2A2A38" />
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:text="⚙"
+                android:textSize="16sp"
+                android:padding="0dp"
+                android:textColor="#FFFFFF"
+                android:background="#2A2A38" />
+
+            <Button
+                android:id="@+id/btnRefresh"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="6dp"
+                android:text="↻"
+                android:textSize="17sp"
+                android:padding="0dp"
+                android:textColor="#FFFFFF"
+                android:background="#2A2A38" />
+        </LinearLayout>
+
+        <!-- vyhledávání -->
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="6dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:visibility="gone"
+            android:background="#1A1A24">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Hledat stanici…"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#6A6A7A"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:background="@null"
+                android:paddingLeft="4dp" />
+
+            <Button
+                android:id="@+id/btnSearchClose"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:text="✕"
+                android:textSize="14sp"
+                android:padding="0dp"
+                android:textColor="#FFFFFF"
+                android:background="#2A2A38" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="#1E1E28"
+            android:dividerHeight="1dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:cacheColorHint="#00000000" />
+    </LinearLayout>
+
+    <!-- ============ 2) PRAVE HRAJE ============ -->
+    <FrameLayout
+        android:id="@+id/viewNowPlaying"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <!-- logo stanice jako pozadi -->
+        <ImageView
+            android:id="@+id/imgBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.28"
+            android:contentDescription="@null" />
+
+        <!-- ztmaveni, aby byl text citelny -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <!-- horni radek: zpet + hodiny + stop -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="‹ Stanice"
+                    android:textSize="13sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#FFFFFF"
+                    android:background="#332A2A38" />
+
+                <TextView
+                    android:id="@+id/tvNpClock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="--:--"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#B0B0C0" />
+
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="44dp"
+                    android:layout_height="36dp"
+                    android:text="■"
+                    android:textSize="14sp"
+                    android:padding="0dp"
+                    android:visibility="gone"
+                    android:textColor="#FFFFFF"
+                    android:background="#332A2A38" />
+            </LinearLayout>
+
+            <!-- stred: nazev stanice + skladba -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvNpStation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="6"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/tvNpTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="6"
+                    android:textColor="#4FC3F7" />
+
+                <!-- velke tlacitko play / stop -->
+                <Button
+                    android:id="@+id/btnPlayPause"
+                    android:layout_width="76dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="14dp"
+                    android:text="■"
+                    android:textSize="22sp"
+                    android:padding="0dp"
+                    android:textColor="#FFFFFF"
+                    android:background="#CC2A2A38" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- ============ 3) HODINY PRES CELY DISPLEJ ============ -->
+    <!--
+      Rozdeleno na dve casti s pevnym rozdelenim mista:
+      horni (vaha 1) drzi hodiny s datem, spodni (wrap_content) stanici
+      se skladbou. Diky tomu si nemaji jak lezt do sebe, at je pismo
+      jakkoli velke.
+    -->
+    <LinearLayout
+        android:id="@+id/viewClock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#000000"
+        android:visibility="gone">
+
+        <!-- hodiny + datum: dostanou vsechno misto, ktere zbyde -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvBigClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--:--"
+                android:textSize="124sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvBigDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textSize="17sp"
+                android:textColor="#8A8A99" />
+        </LinearLayout>
+
+        <!-- stanice + skladba: vlastni misto u spodni hrany -->
+        <LinearLayout
+            android:id="@+id/clockBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvBigStation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:textColor="#4FC3F7" />
+
+            <TextView
+                android:id="@+id/tvBigTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:includeFontPadding="false"
+                android:textColor="#D0D0DA" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

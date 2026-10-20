@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Ikona aplikace: vysílací stožár s vlnami a nápisem FREE RADIO.
+  Text je převedený na křivky - Android ve vektorech písmo nepodporuje.
+  Bez gradientů, aby to fungovalo i na starších verzích Androidu.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- pozadí -->
+    <path
+        android:fillColor="#12384D"
+        android:pathData="M22,0 L86,0 A22,22 0 0 1 108,22 L108,86 A22,22 0 0 1 86,108 L22,108 A22,22 0 0 1 0,86 L0,22 A22,22 0 0 1 22,0 Z" />
+
+    <!-- vnější vlny -->
+    <path android:strokeColor="#3E8FB8" android:strokeWidth="4.5" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M32,16 A24,24 0 0 0 32,44" />
+    <path android:strokeColor="#3E8FB8" android:strokeWidth="4.5" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M76,16 A24,24 0 0 1 76,44" />
+
+    <!-- vnitřní vlny -->
+    <path android:strokeColor="#7FD4F5" android:strokeWidth="4.5" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M43,22 A13.5,13.5 0 0 0 43,38" />
+    <path android:strokeColor="#7FD4F5" android:strokeWidth="4.5" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M65,22 A13.5,13.5 0 0 1 65,38" />
+
+    <!-- vysílač, stožár, základna -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M54,24 m-5.5,0 a5.5,5.5 0 1,0 11,0 a5.5,5.5 0 1,0 -11,0" />
+    <path android:fillColor="#FFFFFF" android:pathData="M52,31 L56,31 L59,57 L49,57 Z" />
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M43,57 L65,57 A2.4,2.4 0 0 1 65,62 L43,62 A2.4,2.4 0 0 1 43,57 Z" />
+
+    <!-- nápis FREE -->
+    <path android:fillColor="#FFFFFF" android:pathData="M27.64 68.42H37.79V71.26H31.40V73.98H37.41V76.82H31.40V83.00H27.64Z M46.65 74.88Q47.83 74.88 48.34 74.45Q48.85 74.01 48.85 73.00Q48.85 72.00 48.34 71.57Q47.83 71.14 46.65 71.14H45.06V74.88ZM45.06 77.48V83.00H41.30V68.42H47.05Q49.93 68.42 51.27 69.39Q52.61 70.35 52.61 72.44Q52.61 73.89 51.92 74.82Q51.22 75.74 49.81 76.18Q50.58 76.36 51.19 76.98Q51.80 77.60 52.43 78.86L54.47 83.00H50.46L48.69 79.38Q48.15 78.28 47.60 77.88Q47.05 77.48 46.13 77.48Z M56.71 68.42H66.85V71.26H60.46V73.98H66.47V76.82H60.46V80.16H67.07V83.00H56.71Z M70.37 68.42H80.51V71.26H74.13V73.98H80.13V76.82H74.13V80.16H80.73V83.00H70.37Z" />
+
+    <!-- nápis RADIO -->
+    <path android:fillColor="#7FD4F5" android:pathData="M30.81 92.91Q31.70 92.91 32.08 92.58Q32.47 92.25 32.47 91.50Q32.47 90.75 32.08 90.43Q31.70 90.11 30.81 90.11H29.63V92.91ZM29.63 94.86V99.00H26.81V88.06H31.11Q33.27 88.06 34.28 88.79Q35.29 89.52 35.29 91.08Q35.29 92.17 34.76 92.86Q34.24 93.56 33.18 93.89Q33.76 94.02 34.22 94.48Q34.68 94.95 35.15 95.89L36.68 99.00H33.68L32.34 96.28Q31.94 95.46 31.53 95.16Q31.11 94.86 30.42 94.86Z M45.79 97.01H41.38L40.69 99.00H37.85L41.90 88.06H45.26L49.31 99.00H46.48ZM42.09 94.98H45.08L43.59 90.63Z M54.38 90.20V96.87H55.40Q57.12 96.87 58.04 96.01Q58.95 95.15 58.95 93.52Q58.95 91.90 58.04 91.05Q57.13 90.20 55.40 90.20ZM51.56 88.06H54.54Q57.03 88.06 58.25 88.42Q59.47 88.78 60.34 89.62Q61.11 90.36 61.48 91.33Q61.86 92.30 61.86 93.52Q61.86 94.76 61.48 95.73Q61.11 96.70 60.34 97.44Q59.46 98.29 58.23 98.64Q57.00 99.00 54.54 99.00H51.56Z M64.82 88.06H67.64V99.00H64.82Z M76.19 89.91Q74.90 89.91 74.19 90.86Q73.48 91.81 73.48 93.54Q73.48 95.26 74.19 96.22Q74.90 97.17 76.19 97.17Q77.49 97.17 78.20 96.22Q78.91 95.26 78.91 93.54Q78.91 91.81 78.20 90.86Q77.49 89.91 76.19 89.91ZM76.19 87.87Q78.83 87.87 80.32 89.38Q81.82 90.88 81.82 93.54Q81.82 96.19 80.32 97.70Q78.83 99.21 76.19 99.21Q73.56 99.21 72.06 97.70Q70.57 96.19 70.57 93.54Q70.57 90.88 72.06 89.38Q73.56 87.87 76.19 87.87Z" />
+
+</vector>
