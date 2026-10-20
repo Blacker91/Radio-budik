@@ -144,7 +144,7 @@ gh repo create radio-budik --public --source=. --push
 
 **2. Doplnit svůj účet do skriptu**
 
-Výchozí repozitář je `Blacker91/radio-budik` — v `vydat.sh` (řádek `REPO=`) i v `MainActivity.java` (konstanta `DEFAULT_UPDATE_URL`). Pokud si projekt forkneš, přepiš obojí na svůj účet.
+Výchozí repozitář je `Blacker91/Radio-budik` — v `vydat.sh` (řádek `REPO=`) i v `MainActivity.java` (konstanta `DEFAULT_UPDATE_URL`). Pokud si projekt forkneš, přepiš obojí na svůj účet.
 
 **3. Povolení v budíku**
 

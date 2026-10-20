@@ -14,7 +14,7 @@
 set -euo pipefail
 
 # ---------- co si nastav ----------
-REPO="${REPO:-Blacker91/radio-budik}"        # tvuj ucet/repozitar na GitHubu
+REPO="${REPO:-Blacker91/Radio-budik}"        # tvuj ucet/repozitar na GitHubu
 KEYSTORE="${KEYSTORE:-$HOME/budik.keystore}"
 ALIAS="${ALIAS:-budik}"
 BUILD_TOOLS="${BUILD_TOOLS:-$HOME/android-sdk/build-tools/33.0.2}"

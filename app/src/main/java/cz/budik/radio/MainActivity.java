@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements WebServer.Handler {
      * nainstalovat). Zastupne slovo ZMENME kontrolu uplne vypne.
      */
     public static final String DEFAULT_UPDATE_URL =
-            "https://raw.githubusercontent.com/Blacker91/radio-budik/main/verze.json";
+            "https://raw.githubusercontent.com/Blacker91/Radio-budik/main/verze.json";
 
     /** Automaticka kontrola nejvyse jednou za 24 hodin. */
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60 * 60 * 1000;
